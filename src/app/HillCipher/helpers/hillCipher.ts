@@ -7,7 +7,6 @@ function getKeyMatrix(keyText: string, blockSize: number): number[][] | null {
 
     console.log(keyText.length)
     if (keyText.length !== blockSize * blockSize) {
-        console.log('Длина ключа должна быть равной квадрату размера блока.');
         return null;
     }
 
@@ -57,7 +56,6 @@ export function encryptHill(keyText: string, blockSize: number, plaintext: strin
         const encryptedText = hillCipher(plaintext, keyMatrix, alphabet);
         return encryptedText;
     } else {
-        console.log('Неверный формат ключа.');
-        return '';
+        return 'Неверный формат ключа';
     }
 }

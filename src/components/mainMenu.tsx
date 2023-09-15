@@ -66,7 +66,7 @@ export default function MainMenu() {
                             <ListItemText primary="Шифр Хилла" />
                         </ListItemButton>
                     </Link>
-                    <Link href='../CaesarCipher'>
+                    <Link href='../VigenerCipher'>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
                                 <StarBorder />
@@ -75,7 +75,7 @@ export default function MainMenu() {
                             <ListItemText primary="Шифр Виженера" />
                         </ListItemButton>
                     </Link>
-                    <Link href='../CaesarCipher'>
+                    <Link href='../AtbashCipher'>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
                                 <StarBorder />
@@ -84,7 +84,7 @@ export default function MainMenu() {
                             <ListItemText primary="Шифр Атбаш" />
                         </ListItemButton>
                     </Link>
-                    <Link href='../CaesarCipher'>
+                    <Link href='../A1Z26Cipher'>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
                                 <StarBorder />

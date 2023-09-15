@@ -1,16 +1,13 @@
 'use client'
 
 import MainMenu from '@/components/mainMenu';
-import styles from './page.module.css'
-import { Divider, Paper, Typography, TextField } from '@mui/material';
+import styles from '../page.module.css'
+import { Paper, TextField, Box, Tabs, Tab, Alert, AlertTitle } from '@mui/material';
 import { encryptHill } from './helpers/hillCipher';
 import { useState } from 'react';
+import AlertComponent from '@/components/alert';
 
-
-
-
-
-export default function CaesarCipher() {
+export default function HillCipher() {
 
     const [encrypt, setEncrypt] = useState({
         alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ',
@@ -19,18 +16,25 @@ export default function CaesarCipher() {
         result: '',
     });
 
+    const [alert, setAlert] = useState({
+        wrongKey: false,
+    });
+
     const handleEncrypt = (e: { target: { value: any; }; }) => {
         const result = encryptHill(encrypt.keyText, encrypt.blockSize, e.target.value, encrypt.alphabet);
-        setEncrypt({ ...encrypt, result: result })
+        if (result === 'Неверный формат ключа') {
+            setAlert({ ...alert, wrongKey: true })
+        } else {
+            setEncrypt({ ...encrypt, result: result })
+        }
     }
+
+    const handleClose = () => {
+        setAlert({ wrongKey: false, })
+    };
 
     return (
         <main className={styles.main}>
-            <div className={styles.header}>
-                <p>
-                    CipherHub
-                </p>
-            </div>
             <div className={styles.centerBlock}>
                 <MainMenu />
 
@@ -49,9 +53,6 @@ export default function CaesarCipher() {
                     </div>
 
                     <Paper sx={{ padding: '10px' }} elevation={3}>
-                        <Typography fontSize={'1.3rem'} >Шифр Хилла</Typography>
-                        <Divider />
-
                         <TextField
                             autoComplete='off'
                             fullWidth
@@ -96,12 +97,12 @@ export default function CaesarCipher() {
                             label='Результат шифра'
                             size='small'
                             disabled
-                            value={encrypt.result}
+                            value={encrypt.result.toLowerCase()}
                         />
                     </Paper>
+                    <AlertComponent message='Неверный формат ключа. Длина ключа должна быть равной квадрату размера блока' severity='error' open={alert.wrongKey} handleClose={handleClose} />
                 </div>
             </div>
-
         </main>
     );
 }
