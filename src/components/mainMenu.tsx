@@ -57,7 +57,7 @@ export default function MainMenu() {
                             <ListItemText primary="Шифр Цезаря" />
                         </ListItemButton>
                     </Link>
-                    <Link href='../CaesarCipher'>
+                    <Link href='../HillCipher'>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
                                 <StarBorder />

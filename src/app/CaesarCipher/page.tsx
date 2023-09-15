@@ -3,7 +3,7 @@
 import MainMenu from '@/components/mainMenu';
 import styles from './page.module.css';
 import { Divider, Paper, Typography, TextField } from '@mui/material';
-import { caesarCipherEncrypt } from './helpers/caesarCipher';
+import { caesarCipherDecrypt, caesarCipherEncrypt } from './helpers/caesarCipher';
 import { useState } from 'react';
 import { KeyboardEvent } from 'react';
 
@@ -13,10 +13,17 @@ export default function CaesarCipher() {
 
     const [rot, setRot] = useState(0);
     const [result, setResult] = useState('');
+    const [decrypt, setDecrypt] = useState('');
 
-    const handleBlur = (e: { target: { value: any; }; }) => {
+    const handleEncrypt = (e: { target: { value: any; }; }) => {
         if (rot !== 0) {
             setResult(caesarCipherEncrypt(e.target.value, rot));
+        }
+    }
+
+    const handleDecrypt = (e: { target: { value: any; }; }) => {
+        if (rot !== 0) {
+            setDecrypt(caesarCipherDecrypt(e.target.value, rot));
         }
     }
 
@@ -55,7 +62,7 @@ export default function CaesarCipher() {
                             onChange={e => setRot(Number(e.target.value))}
                         />
                         <TextField
-                            onBlur={handleBlur}
+                            onBlur={handleEncrypt}
                             sx={{ marginTop: '20px' }}
                             fullWidth
                             id="outlined-multiline-flexible"
@@ -71,6 +78,38 @@ export default function CaesarCipher() {
                             size='small'
                             disabled
                             value={result}
+                        />
+                    </Paper>
+
+                    <Paper sx={{ padding: '10px' }} elevation={3}>
+                        <Typography fontSize={'1.3rem'} >Дешифровка Цезаря</Typography>
+                        <Divider />
+
+                        <TextField
+                            fullWidth
+                            sx={{ marginTop: '20px' }}
+                            label='Количество ROT'
+                            size='small'
+                            onChange={e => setRot(Number(e.target.value))}
+                        />
+
+                        <TextField
+                            onBlur={handleDecrypt}
+                            sx={{ marginTop: '20px' }}
+                            fullWidth
+                            id="outlined-multiline-flexible"
+                            label="Входной текст"
+                            multiline
+                            rows={10}
+                        />
+
+                        <TextField
+                            fullWidth
+                            sx={{ marginTop: '20px' }}
+                            label='Результат дешифровки'
+                            size='small'
+                            disabled
+                            value={decrypt}
                         />
                     </Paper>
                 </div>
