@@ -113,22 +113,13 @@ export default function MainMenu() {
                             <ListItemText primary="Код Хаффмана" />
                         </ListItemButton>
                     </Link>
-                    <Link href='../CaesarCipher'>
+                    <Link href='../Base64Code'>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
                                 <StarBorder />
                             </ListItemIcon>
 
-                            <ListItemText primary="Base 64 преобразование кода в текст" />
-                        </ListItemButton>
-                    </Link>
-                    <Link href='../CaesarCipher'>
-                        <ListItemButton sx={{ pl: 4 }}>
-                            <ListItemIcon>
-                                <StarBorder />
-                            </ListItemIcon>
-
-                            <ListItemText primary="Base 64 преобразование текста в код" />
+                            <ListItemText primary="Base 64 преобразование" />
                         </ListItemButton>
                     </Link>
                 </List>
