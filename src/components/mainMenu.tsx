@@ -104,7 +104,7 @@ export default function MainMenu() {
             </ListItemButton>
             <Collapse in={open.code} timeout="auto">
                 <List component="div" disablePadding>
-                    <Link href='../CaesarCipher'>
+                    <Link href='../Haffman'>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon>
                                 <StarBorder />
