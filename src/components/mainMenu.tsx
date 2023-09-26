@@ -1,3 +1,4 @@
+'use client'
 
 import { ListSubheader, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -10,18 +11,20 @@ import Link from 'next/link';
 export default function MainMenu() {
 
     const [open, setOpen] = React.useState({
-        cipher: true,
-        code: true,
+        cipher: false,
+        code: false,
+        hash: false,
     });
-    // const open = true;
 
     const handleClick = (e: any) => {
-        if (e.target.innerText === 'Шифры') {
-            setOpen(prevState => ({ cipher: !prevState.cipher, code: prevState.code }));
+        if (e.target.innerText === 'Шифрование') {
+            setOpen(prevState => ({ cipher: !prevState.cipher, code: prevState.code, hash: prevState.hash }));
         } else if (e.target.innerText === 'Кодирование') {
-            setOpen(prevState => ({ cipher: prevState.cipher, code: !prevState.code }));
+            setOpen(prevState => ({ cipher: prevState.cipher, code: !prevState.code, hash: prevState.hash }));
+        } else if (e.target.innerText === 'Хеширование') {
+            setOpen(prevState => ({ cipher: prevState.cipher, code: prevState.code, hash: !prevState.hash }));
         } else {
-            setOpen({ cipher: false, code: false });
+            setOpen({ cipher: false, code: false, hash: false });
         }
     }
 
@@ -43,7 +46,7 @@ export default function MainMenu() {
                 <ListItemIcon>
                     <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Шифры" />
+                <ListItemText primary="Шифрование" />
                 {open.cipher ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open.cipher} timeout="auto" unmountOnExit>
@@ -124,6 +127,69 @@ export default function MainMenu() {
                     </Link>
                 </List>
             </Collapse>
+            <ListItemButton id='code' onClick={handleClick}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Хеширование" />
+                {open.hash ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open.hash} timeout="auto">
+                <List component="div" disablePadding>
+                    <Link href='../MD5'>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <StarBorder />
+                            </ListItemIcon>
+
+                            <ListItemText primary="MD5" />
+                        </ListItemButton>
+                    </Link>
+                    <Link href='../SHA1'>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <StarBorder />
+                            </ListItemIcon>
+
+                            <ListItemText primary="SHA-1" />
+                        </ListItemButton>
+                    </Link>
+                    <Link href='../SHA256'>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <StarBorder />
+                            </ListItemIcon>
+
+                            <ListItemText primary="SHA-256" />
+                        </ListItemButton>
+                    </Link>
+                    <Link href='../SHA384'>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <StarBorder />
+                            </ListItemIcon>
+
+                            <ListItemText primary="SHA-384" />
+                        </ListItemButton>
+                    </Link>
+                    <Link href='../SHA512'>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <StarBorder />
+                            </ListItemIcon>
+                            <ListItemText primary="SHA-512" />
+                        </ListItemButton>
+                    </Link>
+                </List>
+            </Collapse>
+            <Link href='../Passwd'>
+                <ListItemButton id='cipher' onClick={handleClick}>
+                    <ListItemIcon>
+                        <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Генератор паролей" />
+                </ListItemButton>
+            </Link>
         </List>
     );
 }

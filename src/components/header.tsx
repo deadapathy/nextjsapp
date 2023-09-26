@@ -6,7 +6,9 @@ export default function Header() {
 
     return (
         <div className={styles.header}>
-            <Link href={'/'}>CipherHub</Link>
+            <div style={{ paddingTop: '7px' }}>
+                <Link href={'/'}>Cipher Hub</Link>
+            </div>
         </div>
     );
 
